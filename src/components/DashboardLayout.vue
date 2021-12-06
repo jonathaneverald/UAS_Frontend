@@ -3,8 +3,8 @@
         <v-navigation-drawer class="fullheight" width="256" permanent app fixed>
             <v-list-item>
                 <v-list-item-content>
-                    <v-list-item-title class="title">Jonathan</v-list-item-title>
-                    <v-list-item-subtitle>190710345</v-list-item-subtitle>
+                    <v-list-item-title class="title">onMart</v-list-item-title>
+                    <v-list-item-subtitle>Supermarket</v-list-item-subtitle>
                 </v-list-item-content>
             </v-list-item>
 
@@ -36,7 +36,10 @@ export default{
         return{
             items: [
                 { title: "Dashboard", to: "/" },
-                { title: "GD", to: "/gd"},
+                { title: "Users", to: "/user"},
+                { title: "Products", to: "/product"},
+                { title: "Toko", to: "/toko"},
+                { title: "Karyawan", to: "/karyawan"}
             ],
         };
     },

@@ -21,11 +21,29 @@ const router = new VueRouter({
                     name: "Root",
                     component: importComponent("Dashboard"),
                 },
-                // To Do List
+                // Users
                 {
-                    path: "/gd",
-                    name: "Guided",
-                    component: importComponent("TodoList/List"),
+                    path: "/user",
+                    name: "Users",
+                    component: importComponent("TodoList/Users"),
+                },
+                // Products
+                {
+                    path: "/product",
+                    name: "Products",
+                    component: importComponent("TodoList/Products"),
+                },
+                // Toko
+                {
+                    path: "/toko",
+                    name: "Toko",
+                    component: importComponent("TodoList/Toko"),
+                },
+                // Karyawan
+                {
+                    path: "/karyawan",
+                    name: "Karyawan",
+                    component: importComponent("TodoList/Karyawan"),
                 },
             ],
         },
