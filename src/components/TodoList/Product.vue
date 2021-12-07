@@ -1,7 +1,7 @@
 <template>
     <v-main class="list">
         <h3 class="text-h3 font-weight-medium mb-5"> Products </h3>
-        <v-card>
+        <v-card dark>
             <v-card-title>
                 <v-text-field
                     v-model="search"
@@ -62,7 +62,7 @@
 
 <script>
 export default {
-    name: "Products",
+    name: "Product",
     data() {
         return {
             inputType: 'Tambah',
@@ -108,7 +108,7 @@ export default {
             }
         },
         readData() {
-            var url = this.$api + '/products';
+            var url = this.$api + '/product';
             this.$http.get(url, {
                 headers: {
                     'Authorization' : 'Bearer ' + localStorage.getItem('token')
@@ -118,14 +118,14 @@ export default {
             })
         },
         save() {
-            this.products.append('product_name', this.form.product_name);
-            this.products.append('stock', this.form.stock);
-            this.products.append('price', this.form.price);
-            this.products.append('desc', this.form.desc);
+            this.product.append('product_name', this.form.product_name);
+            this.product.append('stock', this.form.stock);
+            this.product.append('price', this.form.price);
+            this.product.append('desc', this.form.desc);
 
-            var url = this.$api + '/products/'
+            var url = this.$api + '/product/'
             this.load = true;
-            this.$http.post(url, this.products, {
+            this.$http.post(url, this.product, {
                 headers: {
                     'Authorization' : 'Bearer ' + localStorage.getItem('token'),
                 }
@@ -152,7 +152,7 @@ export default {
                 desc : this.form.desc
             };
 
-            var url = this.$api + '/products/' + this.editId;
+            var url = this.$api + '/product/' + this.editId;
             this.load = true;
             this.$http.put(url, newData, {
                 headers: {
@@ -175,7 +175,7 @@ export default {
             });
         },
         deleteData(){
-            var url = this.$api + '/products/' + this.deleteId;
+            var url = this.$api + '/product/' + this.deleteId;
             this.load = true;
             this.$http.delete(url, {
                 headers: {

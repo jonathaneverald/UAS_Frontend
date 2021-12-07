@@ -1,8 +1,8 @@
 <template>
     <v-main class="list">
         <h3 class="text-h3 font-weight-medium mb-5"> Karyawan </h3>
-        <v-card>
-            <v-card-title>
+        <v-card dark>
+            <v-card-title >
                 <v-text-field
                     v-model="search"
                     append-icon="mdi-magnify"
@@ -13,7 +13,7 @@
                 <v-spacer></v-spacer>
                 <v-btn color="success" dark @click="dialog = true"> Tambah </v-btn>
             </v-card-title>
-            <v-data-table :headers="headers" :items="karyawans" :search="search">
+            <v-data-table dark :headers="headers" :items="karyawans" :search="search">
                 <template v-slot:[`item.actions`]="{ item }">
                     <v-btn small class="mr-2" @click="editHandler(item)"> edit </v-btn>
                     <v-btn small @click="deleteHandler(item.id)"> delete </v-btn>
@@ -27,10 +27,10 @@
                 </v-card-title>
                 <v-card-text>
                     <v-container>
-                        <v-text-field v-model="form.nama" label="Nama" required></v-text-field>
-                        <v-textrea v-model="form.alamat" label="Alamat" required></v-textrea>
+                        <v-text-field v-model="form.nama_karyawan" label="Nama" required></v-text-field>
+                        <v-textarea v-model="form.alamat_karyawan" label="Alamat" required></v-textarea>
                         <v-text-field v-model="form.gaji" label="Gaji" required></v-text-field>
-                        <v-text-field v-model="form.no_hp" label="Nomor Telepon" required></v-text-field>
+                        <v-text-field v-model="form.nohp_karyawan" label="Nomor Telepon" required></v-text-field>
                     </v-container>
                 </v-card-text>
                 <v-card-actions>
@@ -62,7 +62,7 @@
 
 <script>
 export default {
-    name: "Karyawans",
+    name: "Karyawan",
     data() {
         return {
             inputType: 'Tambah',
@@ -80,20 +80,20 @@ export default {
                     sortable: true,
                     value: "id",
                 },
-                { text: "Nama", value: "nama" },
-                { text: "Alamat", value: "alamat" },
+                { text: "Nama", value: "nama_karyawan" },
+                { text: "Alamat", value: "alamat_karyawan" },
                 { text: "Gaji", value: "gaji" },
-                { text: "Nomor Telepon", value: "no_hp" },
+                { text: "Nomor Telepon", value: "nohp_karyawan" },
                 { text: "Actions", value: "actions" },
             ],
             karyawan: new FormData,
             karyawans: [],
             form: {
                 id: null,
-                nama: null,
-                alamat: null,
+                nama_karyawan: null,
+                alamat_karyawan: null,
                 gaji: null,
-                no_hp: null,
+                nohp_karyawan: null,
                 desc: null,
             },
             deleteId: '',
@@ -109,7 +109,7 @@ export default {
             }
         },
         readData() {
-            var url = this.$api + '/karyawans';
+            var url = this.$api + '/karyawan';
             this.$http.get(url, {
                 headers: {
                     'Authorization' : 'Bearer ' + localStorage.getItem('token')
@@ -119,14 +119,14 @@ export default {
             })
         },
         save() {
-            this.karyawans.append('nama', this.form.nama);
-            this.karyawans.append('alamat', this.form.alamat);
-            this.karyawans.append('gaji', this.form.gaji);
-            this.karyawans.append('no_hp', this.form.no_hp);
+            this.karyawan.append('nama_karyawan', this.form.nama_karyawan);
+            this.karyawan.append('alamat_karyawan', this.form.alamat_karyawan);
+            this.karyawan.append('gaji', this.form.gaji);
+            this.karyawan.append('nohp_karyawan', this.form.nohp_karyawan);
 
-            var url = this.$api + '/karyawans/'
+            var url = this.$api + '/karyawan/'
             this.load = true;
-            this.$http.post(url, this.karyawans, {
+            this.$http.post(url, this.karyawan, {
                 headers: {
                     'Authorization' : 'Bearer ' + localStorage.getItem('token'),
                 }
@@ -147,13 +147,13 @@ export default {
         },
         update(){
             let newData = {
-                nama : this.form.nama,
-                alamat : this.form.alamat,
+                nama_karyawan : this.form.nama_karyawan,
+                alamat_karyawan : this.form.alamat_karyawan,
                 gaji : this.form.gaji,
-                no_hp : this.form.no_hp,
+                nohp_karyawan : this.form.nohp_karyawan,
             };
 
-            var url = this.$api + '/karyawans/' + this.editId;
+            var url = this.$api + '/karyawan/' + this.editId;
             this.load = true;
             this.$http.put(url, newData, {
                 headers: {
@@ -176,7 +176,7 @@ export default {
             });
         },
         deleteData(){
-            var url = this.$api + '/karyawans/' + this.deleteId;
+            var url = this.$api + '/karyawan/' + this.deleteId;
             this.load = true;
             this.$http.delete(url, {
                 headers: {
@@ -201,10 +201,10 @@ export default {
         editHandler(item) {
             this.inputType = 'Ubah';
             this.editId = item.id;
-            this.form.nama = item.no_hp;
-            this.form.alamat = item.alamat;
+            this.form.nama_karyawan = item.nama_karyawan;
+            this.form.alamat_karyawan = item.alamat_karyawan;
             this.form.gaji = item.gaji;
-            this.form.no_hp = item.no_hp;
+            this.form.nohp_karyawan = item.nohp_karyawan;
             this.dialog = true;
         },
         deleteHandler(id) {
@@ -225,10 +225,10 @@ export default {
             this.inputType = 'Tambah';
         },
         resetForm() {
-            this.form = { nama: null,
+            this.form = { nama_karyawan: null,
                 gaji: null,
-                alamat: null,
-                no_hp: null};
+                alamat_karyawan: null,
+                nohp_karyawan: null};
         },
     },
     computed: {

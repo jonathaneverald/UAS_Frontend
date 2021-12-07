@@ -1,7 +1,7 @@
 <template>
     <v-main class="list">
         <h3 class="text-h3 font-weight-medium mb-5"> Users </h3>
-        <v-card>
+        <v-card dark>
             <v-card-title>
                 <v-text-field
                     v-model="search"
@@ -29,6 +29,7 @@
                     <v-container>
                         <v-text-field v-model="form.name" label="Nama" required></v-text-field>
                         <v-text-field v-model="form.email" label="Email" required></v-text-field>
+                        <v-text-field v-model="form.password" label="Password" required></v-text-field>
                         <v-textarea v-model="form.alamat" label="Alamat" required></v-textarea>
                         <v-text-field v-model="form.no_telp" label="Nomor Telepon" required></v-text-field>
                     </v-container>
@@ -74,14 +75,9 @@ export default {
             dialog: false,
             dialogConfirm: false,
             headers: [
-                {
-                    text: "No",
-                    align: "start",
-                    sortable: true,
-                    value: "no_user",
-                },
-                { text: "Nama", value: "name" },
+                { text: "Nama", value: "name" ,align: "start", sortable: true},
                 { text: "Email", value: "email" },
+                //{ text: "Password", value: "password" },
                 { text: "Alamat", value: "alamat" },
                 { text: "Nomor Telepon", value: "no_telp" },
                 { text: "Actions", value: "actions" },
@@ -92,6 +88,7 @@ export default {
                 no: null,
                 name: null,
                 email: null,
+                password: null,
                 alamat: null,
                 no_telp: null,
             },
@@ -118,14 +115,15 @@ export default {
             })
         },
         save() {
-            this.users.append('name', this.form.name);
-            this.users.append('email', this.form.email);
-            this.users.append('alamat', this.form.alamat);
-            this.users.append('no_telp', this.form.no_telp);
+            this.user.append('name', this.form.name);
+            this.user.append('email', this.form.email);
+            this.user.append('password', this.form.password);
+            this.user.append('alamat', this.form.alamat);
+            this.user.append('no_telp', this.form.no_telp);
 
-            var url = this.$api + '/users/'
+            var url = this.$api + '/user/'
             this.load = true;
-            this.$http.post(url, this.users, {
+            this.$http.post(url, this.user, {
                 headers: {
                     'Authorization' : 'Bearer ' + localStorage.getItem('token'),
                 }
@@ -148,11 +146,12 @@ export default {
             let newData = {
                 name : this.form.name,
                 email : this.form.email,
+                password : this.form.password,
                 alamat : this.form.alamat,
                 no_telp : this.form.no_telp
             };
 
-            var url = this.$api + '/users/' + this.editId;
+            var url = this.$api + '/user/' + this.editId;
             this.load = true;
             this.$http.put(url, newData, {
                 headers: {
@@ -175,7 +174,7 @@ export default {
             });
         },
         deleteData(){
-            var url = this.$api + '/users/' + this.deleteId;
+            var url = this.$api + '/user/' + this.deleteId;
             this.load = true;
             this.$http.delete(url, {
                 headers: {
@@ -202,6 +201,7 @@ export default {
             this.editId = item.id;
             this.form.name = item.name;
             this.form.email = item.email;
+            this.form.password = item.password;
             this.form.alamat = item.alamat;
             this.form.no_telp = item.no_telp;
             this.dialog = true;
@@ -226,6 +226,7 @@ export default {
         resetForm() {
             this.form = { name: null,
                 email: null,
+                password: null,
                 alamat: null,
                 no_telp: null };
         },

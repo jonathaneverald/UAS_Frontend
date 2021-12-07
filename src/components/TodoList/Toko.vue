@@ -1,7 +1,7 @@
 <template>
     <v-main class="list">
-        <h3 class="text-h3 font-weight-medium mb-5"> Toko </h3>
-        <v-card>
+        <h3 class="text-h3 font-weight-medium mb-5"> Cabang Toko </h3>
+        <v-card dark>
             <v-card-title>
                 <v-text-field
                     v-model="search"
@@ -61,7 +61,7 @@
 
 <script>
 export default {
-    name: "Tokos",
+    name: "Toko",
     data() {
         return {
             inputType: 'Tambah',
@@ -106,7 +106,7 @@ export default {
             }
         },
         readData() {
-            var url = this.$api + '/tokos';
+            var url = this.$api + '/toko';
             this.$http.get(url, {
                 headers: {
                     'Authorization' : 'Bearer ' + localStorage.getItem('token')
@@ -116,13 +116,13 @@ export default {
             })
         },
         save() {
-            this.tokos.append('nama_toko', this.form.nama_toko);
-            this.tokos.append('kode_toko', this.form.kode_toko);
-            this.tokos.append('alamat_toko', this.form.alamat_toko);
+            this.toko.append('nama_toko', this.form.nama_toko);
+            this.toko.append('kode_toko', this.form.kode_toko);
+            this.toko.append('alamat_toko', this.form.alamat_toko);
 
-            var url = this.$api + '/tokos/'
+            var url = this.$api + '/toko/'
             this.load = true;
-            this.$http.post(url, this.tokos, {
+            this.$http.post(url, this.toko, {
                 headers: {
                     'Authorization' : 'Bearer ' + localStorage.getItem('token'),
                 }
@@ -148,7 +148,7 @@ export default {
                 alamat_toko : this.form.alamat_toko,
             };
 
-            var url = this.$api + '/tokos/' + this.editId;
+            var url = this.$api + '/toko/' + this.editId;
             this.load = true;
             this.$http.put(url, newData, {
                 headers: {
@@ -171,7 +171,7 @@ export default {
             });
         },
         deleteData(){
-            var url = this.$api + '/tokos/' + this.deleteId;
+            var url = this.$api + '/toko/' + this.deleteId;
             this.load = true;
             this.$http.delete(url, {
                 headers: {
