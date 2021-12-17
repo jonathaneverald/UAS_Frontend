@@ -105,7 +105,6 @@
                 this.close();
                 this.readData();
                 this.resetForm();
-                this.inputType = 'Tambah';
             }).catch(error => {
                 this.error_message = error.response.data.message;
                 this.color = "red";
@@ -129,7 +128,6 @@
                 this.editId = response.data.data.id;
             });
             this.inputType = 'Ubah';
-            
             
             this.dialog = true;
         },

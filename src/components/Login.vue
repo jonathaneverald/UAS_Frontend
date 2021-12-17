@@ -71,16 +71,23 @@ export default {
             password: this.password,
           })
           .then((response) => {
-            localStorage.setItem("id", response.data.user.id);
-            localStorage.setItem("token", response.data.access_token);
-            this.error_message = response.data.message;
-            this.color = "green";
-            this.snackbar = true;
-            this.load = false;
-            this.clear();
-            this.$router.push({
-              name: "Dashboard",
-            });
+            if (response.data.user.email_verified_at == null) {
+              this.error_message = "Harap lakukan verifikasi email.";
+              this.color = "red";
+              this.snackbar = true;
+              this.load = false;
+            } else {
+              localStorage.setItem("id", response.data.user.id);
+              localStorage.setItem("token", response.data.access_token);
+              this.error_message = response.data.message;
+              this.color = "green";
+              this.snackbar = true;
+              this.load = false;
+              this.clear();
+              this.$router.push({
+                name: "Dashboard",
+              });
+            }
           })
           .catch((error) => {
             this.error_message = error.response.data.error_message;

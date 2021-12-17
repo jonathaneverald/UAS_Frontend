@@ -120,7 +120,7 @@ export default {
             this.toko.append('kode_toko', this.form.kode_toko);
             this.toko.append('alamat_toko', this.form.alamat_toko);
 
-            var url = this.$api + '/toko/'
+            var url = this.$api + '/toko'
             this.load = true;
             this.$http.post(url, this.toko, {
                 headers: {

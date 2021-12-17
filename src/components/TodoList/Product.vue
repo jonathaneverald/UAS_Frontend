@@ -123,7 +123,7 @@ export default {
             this.product.append('price', this.form.price);
             this.product.append('desc', this.form.desc);
 
-            var url = this.$api + '/product/'
+            var url = this.$api + '/product'
             this.load = true;
             this.$http.post(url, this.product, {
                 headers: {

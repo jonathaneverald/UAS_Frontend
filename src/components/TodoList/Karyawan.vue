@@ -124,7 +124,7 @@ export default {
             this.karyawan.append('gaji', this.form.gaji);
             this.karyawan.append('nohp_karyawan', this.form.nohp_karyawan);
 
-            var url = this.$api + '/karyawan/'
+            var url = this.$api + '/karyawan'
             this.load = true;
             this.$http.post(url, this.karyawan, {
                 headers: {

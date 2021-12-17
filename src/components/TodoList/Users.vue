@@ -121,7 +121,7 @@ export default {
             this.user.append('alamat', this.form.alamat);
             this.user.append('no_telp', this.form.no_telp);
 
-            var url = this.$api + '/user/'
+            var url = this.$api + '/user'
             this.load = true;
             this.$http.post(url, this.user, {
                 headers: {
@@ -148,7 +148,7 @@ export default {
                 email : this.form.email,
                 password : this.form.password,
                 alamat : this.form.alamat,
-                no_telp : this.form.no_telp
+                no_telp : this.form.no_telp,
             };
 
             var url = this.$api + '/user/' + this.editId;
